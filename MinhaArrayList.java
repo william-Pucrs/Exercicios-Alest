@@ -50,7 +50,7 @@ public class MinhaArrayList {
             list[i] = list [i-1];
         }
         list[index] = element;
-        
+        count++;
 
     }
     public void	clear(){
