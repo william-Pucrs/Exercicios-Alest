@@ -46,7 +46,29 @@ public class MinhaLinkedList {
         return true;
     }
 
-    public void     add(int index, int element){}
+    public void add(int index, int element){
+        if((index<0)||(index>=count))
+             throw new IndexOutOfBoundsException("Posicao inválida na lista");
+        
+        Nodo novo = new Nodo(element);
+
+        Nodo navegador = head;
+        if(index != 0){
+            index --;
+            Nodo navegador.proxi
+        index --;
+        while(index > 0){
+            navegador = navegador.prox;
+            index --;
+        }
+
+        novo.prox = navegador.prox;
+        navegador.prox = novo;
+        }else
+        novo.prox = head;
+        navegador.prox = head;
+        count ++; 
+    }
 
     public void	    clear(){
         head=null;
@@ -65,7 +87,7 @@ public class MinhaLinkedList {
         return false;
     }
 
-    public int 	    get(int index){
+    public int  get(int index){
         if((index<0)||(index>=count))
             throw new IndexOutOfBoundsException("Posicao inválida na lista");
 
@@ -97,8 +119,32 @@ public class MinhaLinkedList {
         return (count==0);
     }
 
-    public int	    remove(int index){
-        return -1;
+    public int remove(int index){
+        if((index<0)||(index>=count))
+            throw new IndexOutOfBoundsException("Posicao inválida na lista");
+        Nodo navegador = head;
+        index --;
+        while(index >0){
+            navegador = navegador.prox;
+            index --;
+        }
+        Nodo die = navegador.prox
+
+        navegador.prox = die.prox;
+        die.prox null
+
+        if(die == tail){
+            tail = navegador;
+        }
+        return die.valor;
+
+        else{
+            Nodo die = head;
+            die.prox = null;
+            count --;
+            return die.valor;
+        }
+        
     }
 
     public int	    set(int index, int element){
