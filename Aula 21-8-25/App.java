@@ -22,7 +22,7 @@ class App{
         return resultado;
     }
 
-    public int recursaoPotencia(int base, int expoente){
+ public int recursaoPotencia(int base, int expoente){
         
         if(expoente == 0){
             return base;
@@ -31,7 +31,7 @@ class App{
             return -1;
         }
 
-        return 0;
+        return base*recursaoPotencia(base, expoente-1);
     }
 
     public static int somaVetorRecursivo(int array[], int posição){
@@ -53,3 +53,4 @@ class App{
         return 0;
     }
 }
+
