@@ -40,12 +40,12 @@ public class FilaCircular {
 
     // retorna a quantos tem na fila
     public int size (){
-    
+    return 0;
     }
 
     public boolean isEmpty(){
         
-            
+           return false;
     }
 
     public void clear(){
