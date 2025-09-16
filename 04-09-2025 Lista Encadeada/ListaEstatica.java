@@ -19,7 +19,7 @@ public class ListaEstatica {
 
     private void aumentaAEstrutura(){
         if(this.fimDaLista==this.arranjo.length){
-            int [] novoArranjo = new int[arranjo.length];
+            int [] novoArranjo = new int[arranjo.length*2];
             for(int i=0; i<arranjo.length; i++)
                 novoArranjo[i]=arranjo[i];
             arranjo=novoArranjo;
@@ -32,23 +32,50 @@ public class ListaEstatica {
         this.fimDaLista++;
         return true;
     }
-    //public void add(int index, int element){}
+    public void add(int index, int element){
+        validaPosicao(index);
+        aumentaAEstrutura();
+
+        for(int idx=fimDaLista; idx>index; idx--)
+            arranjo[idx]=arranjo[idx-1];
+        arranjo[index]=element;
+
+        fimDaLista++;
+    }
+    
     //public boolean addAll(int[] c) 
+    
     //public boolean addAll(int index, int[] c) 
+
     public void clear(){
         this.fimDaLista=0;
     }
-    //public boolean contains(Object o) 
+    public boolean contains(int o){
+        return (indexOf(o)!=-1);
+    }
+
     public int get(int index){
         validaPosicao(index);
         return arranjo[index];
     }
-    //public int indexOf(int o) 
+
+    public int indexOf(int o){
+        for(int idx=0; idx<fimDaLista; idx++)
+            if(arranjo[idx]==o) return idx;
+        return -1;
+    }
+
     public boolean isEmpty(){
         return this.fimDaLista==0;
     }
-    //public int lastIndexOf(int o) 
-    public int remove(int index){
+
+    public int lastIndexOf(int o){
+        for(int idx=fimDaLista-1; idx>=0; idx--)
+            if(arranjo[idx]==o) return idx;
+        return -1;
+    }
+
+    public int removeByIdx(int index){
         validaPosicao(index);
 
         //salva valor a ser retornado
@@ -56,25 +83,56 @@ public class ListaEstatica {
 
         // ajusta lista 
         //   remove espaços vazios
-
         for(int i=index; i<this.fimDaLista-1; i++)
             this.arranjo[i]=this.arranjo[i+1];
         this.fimDaLista--;
 
+        reduzAEstrutura();
+
         // retorna valor salvo
         return aux;
+    }
+
+    private void reduzAEstrutura(){
+
+        if(arranjo.length>10){
+            if(fimDaLista<=(arranjo.length/4)){
+                int [] novoArranjo = new int[arranjo.length/2];
+                for(int i=0; i<arranjo.length; i++)
+                    novoArranjo[i]=arranjo[i];
+                arranjo=novoArranjo;
+            }
+        }
     }
 
     private void validaPosicao(int index){
         if((index >= fimDaLista)||(index<0))
             throw new RuntimeException("A posição index:"+index+" é inválida");
     }
-    //public boolean remove(int o) 
+
+    public boolean removeByValue(int o) {
+
+        int idx = indexOf(o);
+        if(idx==-1)
+            return false;
+        removeByIdx(idx);
+        return true;
+
+    }
+
     //public boolean removeAll(int[] c) 
-    //public int set(int index, int element) 
+
+    public int set(int index, int element){
+        validaPosicao(index);
+        int oldValue=arranjo[index];
+        arranjo[index]=element;
+        return oldValue;
+    }
+
     public int size(){
         return this.fimDaLista;
     }
+
     //public int[] subList(int fromIndex, int toIndex) 
 
     public String toString(){
@@ -113,7 +171,7 @@ public class ListaEstatica {
 
         System.out.println("O conteudo da posicao 2 é "+le.get(2));
 
-        le.remove(1);
+        le.removeByIdx(1);
         System.out.println(le);
 
     }

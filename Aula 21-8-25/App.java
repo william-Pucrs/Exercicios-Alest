@@ -48,7 +48,7 @@ public class App{
    
     public static int QuickSort(int vetor[]){
         
-        int pivo = vetor.length-1;
+        //int pivo = vetor.length-1;
 
         return 0;
     }
